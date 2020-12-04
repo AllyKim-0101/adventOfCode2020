@@ -11,12 +11,7 @@ function validatePassword(line) {
     let requiredWord = parts[2];
     let password = parts[3];
     let occurance = (password.match(new RegExp(requiredWord, "g")) || []).length
-    if (occurance >= min && occurance <= max) {
-        return true
-    } else {
-        return false
-    }
-
+    return occurance >= min && occurance <= max;
 }
 
 
