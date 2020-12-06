@@ -6,12 +6,13 @@ function validatePassword(line) {
     let parts = line.split(/[-: ]+/g);
     //condition is that the first number is using min of the first alphabet, 
     //the second number is using max of the first alphabet
-    let min = Number(parts[0]);
-    let max = Number(parts[1]);
+    let first = Number(parts[0]);
+    let second = Number(parts[1]);
     let requiredWord = parts[2];
     let password = parts[3];
-    let occurance = (password.match(new RegExp(requiredWord, "g")) || []).length
-    return occurance >= min && occurance <= max;
+    let firstMatch = requiredWord === password.charAt(first - 1);
+    let secondMatch = requiredWord === password.charAt(second - 1);
+    return (firstMatch && !secondMatch) || (!firstMatch && secondMatch)
 }
 
 
@@ -34,4 +35,4 @@ let input = `1-3 a: abcde
 1-3 b: cdefg
 2-9 c: ccccccccc`
 //test
-console.log(countValidPassword(input), 2)
+console.log(countValidPassword(input), 1)
